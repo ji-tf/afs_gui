@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.Qt import *
 
 class Ui_AFS(object):
     def setupUi(self, AFS):
@@ -19,6 +19,7 @@ class Ui_AFS(object):
         self.save = QtWidgets.QPushButton(AFS)
         self.save.setGeometry(QtCore.QRect(910, 760, 101, 23))
         self.save.setObjectName("save")
+        self.textBrowser = QtWidgets.QTextBrowser()
         self.label_passport_afs = QtWidgets.QLabel(AFS)
         self.label_passport_afs.setGeometry(QtCore.QRect(20, 10, 152, 16))
         self.label_passport_afs.setObjectName("label_passport_afs")
@@ -261,13 +262,19 @@ class Ui_AFS(object):
         self.add_information.setText("")
         self.add_information.setObjectName("add_information")
         self.gridLayout_3.addWidget(self.add_information, 5, 2, 1, 2)
+#        self.clean.clicked.connect(self.clearForm)
         self.clean = QtWidgets.QPushButton(AFS)
         self.clean.setGeometry(QtCore.QRect(770, 760, 101, 23))
         self.clean.setObjectName("clean")
 
+#    def clearForm(self):
+#        self.textBrowser.clear()
+#        for lineEdit in self.findChildren(QtWidgets.QLineEdit):      # !!! +++ findChildren
+#            lineEdit.clear()
+            
         self.retranslateUi(AFS)
         QtCore.QMetaObject.connectSlotsByName(AFS)
-
+    
     def retranslateUi(self, AFS):
         _translate = QtCore.QCoreApplication.translate
         AFS.setWindowTitle(_translate("AFS", "AFS_GUI"))
@@ -310,6 +317,28 @@ class Ui_AFS(object):
         self.label_add_information.setText(_translate("AFS", "Дополнительные сведения по требованию ТЗ"))
         self.clean.setText(_translate("AFS", "Очистить форму"))
 
+class MainWindow(QtWidgets.QMainWindow, Ui_AFS):
+    def __init__(self):
+        super().__init__()
+        
+        self.setupUi(self)
+
+        self.pushButton.clicked.connect(self.process)
+
+    def process(self):
+        lineEdits =  self.findChildren(QtWidgets.QLineEdit)
+        print(f'{lineEdits}') #
+        text = ''
+        for lineEdit in lineEdits:
+            if not lineEdit.text():
+                print(f'Заполните {lineEdit.objectName()}')
+                text = f'{text}Заполните {lineEdit.objectName()}\n'
+        if text:
+            msg = QtWidgets.QMessageBox.information(
+                self, 'Внимание', text)
+        else:
+            msg = QtWidgets.QMessageBox.information(
+                self, 'Информация', 'Все lineEdits заполнены.') 
 
 if __name__ == "__main__":
     import sys
