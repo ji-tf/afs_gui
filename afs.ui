@@ -22,9 +22,9 @@
   <widget class="QPushButton" name="save">
    <property name="geometry">
     <rect>
-     <x>940</x>
+     <x>910</x>
      <y>760</y>
-     <width>75</width>
+     <width>101</width>
      <height>23</height>
     </rect>
    </property>
@@ -69,7 +69,11 @@
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QLineEdit" name="nature_area"/>
+     <widget class="QLineEdit" name="nature_area">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
     <item row="4" column="0" colspan="3">
      <widget class="QLabel" name="label_area_afs">
@@ -86,7 +90,11 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="executor"/>
+     <widget class="QLineEdit" name="executor">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
     <item row="7" column="0">
      <widget class="QLabel" name="label_overlap_longitudinal">
@@ -113,7 +121,11 @@
      </widget>
     </item>
     <item row="0" column="3">
-     <widget class="QLineEdit" name="filming_location"/>
+     <widget class="QLineEdit" name="filming_location">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
     <item row="5" column="3">
      <widget class="QLineEdit" name="length_afs"/>
@@ -146,7 +158,11 @@
      <widget class="QDateEdit" name="date_end"/>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="name_object"/>
+     <widget class="QLineEdit" name="name_object">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
     <item row="1" column="2">
      <widget class="QLabel" name="label_customer">
@@ -163,7 +179,11 @@
      </widget>
     </item>
     <item row="1" column="3">
-     <widget class="QLineEdit" name="customer"/>
+     <widget class="QLineEdit" name="customer">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
     <item row="3" column="3">
      <widget class="QLineEdit" name="type_shoot"/>
@@ -292,7 +312,11 @@
      </widget>
     </item>
     <item row="4" column="4">
-     <widget class="QLineEdit" name="frame_size_y"/>
+     <widget class="QLineEdit" name="frame_size_y">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
     <item row="5" column="0">
      <widget class="QLabel" name="label_pixel_size">
@@ -456,6 +480,19 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="clean">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>760</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Очистить форму</string>
+   </property>
   </widget>
  </widget>
  <resources/>

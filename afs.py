@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'untitled.ui'
+# Form implementation generated from reading ui file 'afs.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -17,7 +17,7 @@ class Ui_AFS(object):
         AFS.resize(1041, 803)
         AFS.setMaximumSize(QtCore.QSize(1041, 803))
         self.save = QtWidgets.QPushButton(AFS)
-        self.save.setGeometry(QtCore.QRect(940, 760, 75, 23))
+        self.save.setGeometry(QtCore.QRect(910, 760, 101, 23))
         self.save.setObjectName("save")
         self.label_passport_afs = QtWidgets.QLabel(AFS)
         self.label_passport_afs.setGeometry(QtCore.QRect(20, 10, 152, 16))
@@ -34,6 +34,7 @@ class Ui_AFS(object):
         self.date_start.setObjectName("date_start")
         self.gridLayout.addWidget(self.date_start, 2, 1, 1, 1)
         self.nature_area = QtWidgets.QLineEdit(self.object)
+        self.nature_area.setText("")
         self.nature_area.setObjectName("nature_area")
         self.gridLayout.addWidget(self.nature_area, 3, 1, 1, 1)
         self.label_area_afs = QtWidgets.QLabel(self.object)
@@ -43,6 +44,7 @@ class Ui_AFS(object):
         self.label_date_start.setObjectName("label_date_start")
         self.gridLayout.addWidget(self.label_date_start, 2, 0, 1, 1)
         self.executor = QtWidgets.QLineEdit(self.object)
+        self.executor.setText("")
         self.executor.setObjectName("executor")
         self.gridLayout.addWidget(self.executor, 1, 1, 1, 1)
         self.label_overlap_longitudinal = QtWidgets.QLabel(self.object)
@@ -58,6 +60,7 @@ class Ui_AFS(object):
         self.label_name_object.setObjectName("label_name_object")
         self.gridLayout.addWidget(self.label_name_object, 0, 0, 1, 1)
         self.filming_location = QtWidgets.QLineEdit(self.object)
+        self.filming_location.setText("")
         self.filming_location.setObjectName("filming_location")
         self.gridLayout.addWidget(self.filming_location, 0, 3, 1, 1)
         self.length_afs = QtWidgets.QLineEdit(self.object)
@@ -79,6 +82,7 @@ class Ui_AFS(object):
         self.date_end.setObjectName("date_end")
         self.gridLayout.addWidget(self.date_end, 2, 3, 1, 1)
         self.name_object = QtWidgets.QLineEdit(self.object)
+        self.name_object.setText("")
         self.name_object.setObjectName("name_object")
         self.gridLayout.addWidget(self.name_object, 0, 1, 1, 1)
         self.label_customer = QtWidgets.QLabel(self.object)
@@ -88,6 +92,7 @@ class Ui_AFS(object):
         self.label_type_shoot.setObjectName("label_type_shoot")
         self.gridLayout.addWidget(self.label_type_shoot, 3, 2, 1, 1)
         self.customer = QtWidgets.QLineEdit(self.object)
+        self.customer.setText("")
         self.customer.setObjectName("customer")
         self.gridLayout.addWidget(self.customer, 1, 3, 1, 1)
         self.type_shoot = QtWidgets.QLineEdit(self.object)
@@ -158,6 +163,7 @@ class Ui_AFS(object):
         self.label_frame_size_y.setObjectName("label_frame_size_y")
         self.gridLayout_2.addWidget(self.label_frame_size_y, 4, 3, 1, 1)
         self.frame_size_y = QtWidgets.QLineEdit(self.camera)
+        self.frame_size_y.setText("")
         self.frame_size_y.setObjectName("frame_size_y")
         self.gridLayout_2.addWidget(self.frame_size_y, 4, 4, 1, 1)
         self.label_pixel_size = QtWidgets.QLabel(self.camera)
@@ -255,13 +261,16 @@ class Ui_AFS(object):
         self.add_information.setText("")
         self.add_information.setObjectName("add_information")
         self.gridLayout_3.addWidget(self.add_information, 5, 2, 1, 2)
+        self.clean = QtWidgets.QPushButton(AFS)
+        self.clean.setGeometry(QtCore.QRect(770, 760, 101, 23))
+        self.clean.setObjectName("clean")
 
         self.retranslateUi(AFS)
         QtCore.QMetaObject.connectSlotsByName(AFS)
 
     def retranslateUi(self, AFS):
         _translate = QtCore.QCoreApplication.translate
-        AFS.setWindowTitle(_translate("AFS", "Dialog"))
+        AFS.setWindowTitle(_translate("AFS", "AFS_GUI"))
         self.save.setText(_translate("AFS", "Сохранить"))
         self.label_passport_afs.setText(_translate("AFS", "<html><head/><body><p><span style=\" font-weight:600;\">Паспорт аэрофотосъёмки</span></p></body></html>"))
         self.label_area_afs.setText(_translate("AFS", "<html><head/><body><p>Фактическая площадь АФС, км<span style=\" vertical-align:super;\">2</span>, для АФС объекта площадного характера</p></body></html>"))
@@ -299,6 +308,7 @@ class Ui_AFS(object):
         self.label_other_equipment.setText(_translate("AFS", "Прочая аппаратура"))
         self.label_aircraft.setText(_translate("AFS", "Воздушное судно"))
         self.label_add_information.setText(_translate("AFS", "Дополнительные сведения по требованию ТЗ"))
+        self.clean.setText(_translate("AFS", "Очистить форму"))
 
 
 if __name__ == "__main__":
