@@ -300,6 +300,22 @@ class Ui_AFS(object):
         self.clear.setGeometry(QtCore.QRect(770, 920, 101, 23))
         self.clear.setObjectName("clear")
 
+        def camera_model_3_redo():
+            self.camera_model_3.setText('Sony RX1RM2')
+            self.focal_len_3.setText('35')
+            self.frame_size_x_3.setText('7952')
+            self.frame_size_y_3.setText('5304')
+            self.spectral_characteristics_photo_3.setText('RGB')
+            self.image_format_3.setText('JPEG')
+
+        def camera_model_3_redo2():
+            self.camera_model_3.setText('Sony A6000')
+            self.focal_len_3.setText('20')
+            self.frame_size_x_3.setText('6000')
+            self.frame_size_y_3.setText('4000')
+            self.spectral_characteristics_photo_3.setText('NIR')
+            self.image_format_3.setText('ARW')
+
         self.retranslateUi(AFS)
         self.clear.clicked.connect(self.name_object.clear) # type: ignore
         self.clear.clicked.connect(self.filming_location.clear) # type: ignore
@@ -315,18 +331,8 @@ class Ui_AFS(object):
         self.clear.clicked.connect(self.pixel_size_3.clear) # type: ignore
         self.clear.clicked.connect(self.definition_block.clear) # type: ignore
         self.clear.clicked.connect(self.text_add_information.clear) # type: ignore
-        self.radioButton.clicked['bool'].connect(self.camera_model_3.redo) # type: ignore
-        self.radioButton.clicked['bool'].connect(self.focal_len_3.redo) # type: ignore
-        self.radioButton.clicked['bool'].connect(self.frame_size_x_3.redo) # type: ignore
-        self.radioButton.clicked['bool'].connect(self.frame_size_y_3.redo) # type: ignore
-        self.radioButton.clicked['bool'].connect(self.spectral_characteristics_photo_3.redo) # type: ignore
-        self.radioButton.clicked['bool'].connect(self.image_format_3.redo) # type: ignore
-        self.radioButton_2.clicked['bool'].connect(self.camera_model_3.redo) # type: ignore
-        self.radioButton_2.clicked['bool'].connect(self.focal_len_3.redo) # type: ignore
-        self.radioButton_2.clicked['bool'].connect(self.frame_size_y_3.redo) # type: ignore
-        self.radioButton_2.clicked['bool'].connect(self.spectral_characteristics_photo_3.redo) # type: ignore
-        self.radioButton_2.clicked['bool'].connect(self.image_format_3.redo) # type: ignore
-        self.radioButton_2.clicked['bool'].connect(self.frame_size_x_3.redo) # type: ignore
+        self.radioButton.clicked.connect(camera_model_3_redo) # type: ignore
+        self.radioButton_2.clicked.connect(camera_model_3_redo2) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(AFS)
 
     def retranslateUi(self, AFS):
