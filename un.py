@@ -300,6 +300,7 @@ class Ui_AFS(object):
         self.clear.setGeometry(QtCore.QRect(770, 920, 101, 23))
         self.clear.setObjectName("clear")
 
+
         def camera_model_3_redo():
             self.camera_model_3.setText('Sony RX1RM2')
             self.focal_len_3.setText('35')
@@ -331,13 +332,20 @@ class Ui_AFS(object):
         self.clear.clicked.connect(self.pixel_size_3.clear) # type: ignore
         self.clear.clicked.connect(self.definition_block.clear) # type: ignore
         self.clear.clicked.connect(self.text_add_information.clear) # type: ignore
+        self.clear.clicked.connect(self.camera_model_3.clear) # type: ignore
+        self.clear.clicked.connect(self.focal_len_3.clear) # type: ignore
+        self.clear.clicked.connect(self.frame_size_x_3.clear) # type: ignore
+        self.clear.clicked.connect(self.frame_size_y_3.clear) # type: ignore
+        self.clear.clicked.connect(self.spectral_characteristics_photo_3.clear) # type: ignore
+        self.clear.clicked.connect(self.image_format_3.clear) # type: ignore
         self.radioButton.clicked.connect(camera_model_3_redo) # type: ignore
         self.radioButton_2.clicked.connect(camera_model_3_redo2) # type: ignore
+        self.save.clicked.connect(Save_T.save)
         QtCore.QMetaObject.connectSlotsByName(AFS)
 
     def retranslateUi(self, AFS):
         _translate = QtCore.QCoreApplication.translate
-        AFS.setWindowTitle(_translate("AFS", "AFS UI"))
+        AFS.setWindowTitle(_translate("AFS", "AFS GUI"))
         self.label_name_object.setText(_translate("AFS", "Название или шифр объекта съёмки"))
         self.label_overlap_longitudinal.setText(_translate("AFS", "Продольное перекрытие, %"))
         self.label_overlap_transverse.setText(_translate("AFS", "Поперечное перекрытие, %"))
@@ -397,6 +405,53 @@ class Ui_AFS(object):
         self.radioButton_2.setText(_translate("AFS", "Sony A6000"))
         self.clear.setText(_translate("AFS", "Очистить форму"))
 
+
+class Save_T(Ui_AFS):
+
+        def save(self):
+            name_object = self.name_object.text() # Название или шифр объекта съёмки
+            filming_location = self.filming_location.text() # Съёмочный участок
+            executor = self.executor.currentText() # Исполнитель
+            customer = self.customer.text() # Заказчик
+            date_start = self.date_start.text() # Дата начала АФС
+            date_end = self.date_end.text() # Дата окончания АФС
+            nature_area = self.nature_area.currentText() # (Не)Застроенная
+            type_shoot = self.type_shoot.text() # Вид съёмки
+            area_afs = self.area_afs.text() # Фактическая площадь АФС, для АФС объекта площадного характера
+            length_afs = self.length_afs.text() # Фактическая протяжность АФС, км, для АФС линейного объекта
+            orientation_route = self.orientation_route.currentText() # Ориентация маршрутов (широтная, меридиональная, заданная)
+            overlap_longitudinal = self.overlap_longitudinal.text() # Продольное перекрытие
+            overlap_transverse = self.overlap_transverse.text() # Поперечное перекрытие
+            height = self.height_3.text() # Высота фотографирования
+            resolution = self.resolution_3.text() # Номинальное пространственное разрешение, м
+            camera_model = self.camera_model_3.text() # Модель аэрофотокамеры
+            camera_sn = self.camera_sn_3.text() # Серийный номер аэрофотокамеры
+            long_shift = self.long_shift_3.text() # Наличие и тип компенсации продольного сдвига изображения
+            focal_len = self.focal_len_3.text() # Фокусное расстояние аэрофотокамеры, мм
+            type_lens = self.type_lens_3.text() # Тип и серийный номер объектива (если объектив заменяемый)
+            frame_size_x = self.frame_size_x_3.text() # Размер кадра N(x) пикс
+            frame_size_y = self.frame_size_y_3.text() # Размер кадра N(y) пикс
+            pixel_size = self.pixel_size_3.text() # Физический размер пикселя, мм
+            coordinate_orientation = self.coordinate_orientation_3.text() # Ориентация системы координат снимка
+            api_type = self.api_type_3.text() # Тип аэрофотоустановки (гироплатформы)
+            api_sn = self.api_sn_3.text() # Серийный номер аэрофотоустановки (гироплатформы)
+            spectral_characteristics_photo = self.spectral_characteristics_photo_3.text() # Спектральная характеристика аэрофотоснимков
+            image_format = self.image_format_3.text() # Формат представления цифрового изображения
+            lidar_type = self.lidar_type.text() # Лидар (тип)
+            lidar_sn = self.lidar_sn.text() # Лидар, серийный номер
+            definition_block = self.definition_block.text() # Блок определения положения и ориентации, тип, модель, состав
+            receiver = self.receiver.text() # ГНСС-приёмник, тип, модель
+            other_equipment = self.other_equipment.text() # Прочая аппаратура
+            aircraft = self.aircraft.text() # Воздушное судно"))
+            add_information = self.text_add_information.setText() # Дополнительные сведения по требованию ТЗ
+
+            list = [name_object, filming_location, executor, customer, date_start, date_end, nature_area, type_shoot, area_afs, length_afs, orientation_route, overlap_longitudinal,
+            overlap_transverse, height, resolution, camera_model, camera_sn, long_shift, focal_len, type_lens, frame_size_x, frame_size_y, pixel_size, coordinate_orientation, api_type,
+            api_sn, spectral_characteristics_photo, image_format, lidar_type, lidar_sn, definition_block, receiver, other_equipment, aircraft, add_information]      
+
+            f = open('111.txt', 'w')
+            f.write(list(1))
+            f.close()  
 
 if __name__ == "__main__":
     import sys
