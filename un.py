@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import psycopg2
+import pandas as pd
 
 
 class Ui_AFS(object):
@@ -343,7 +343,7 @@ class Ui_AFS(object):
         self.radioButton_2.clicked.connect(camera_model_3_redo2) # type: ignore
         self.save.clicked.connect(self.save_text)
         QtCore.QMetaObject.connectSlotsByName(AFS)
-        self.save_obj = Save_Class()
+        
 
     def save_text(self):
         name_object = self.name_object.text() # Название или шифр объекта съёмки
@@ -380,15 +380,52 @@ class Ui_AFS(object):
         receiver = self.receiver.text() # ГНСС-приёмник, тип, модель
         other_equipment = self.other_equipment.text() # Прочая аппаратура
         aircraft = self.aircraft.text() # Воздушное судно"))
-        add_information = self.text_add_information.setText() # Дополнительные сведения по требованию ТЗ
+        #add_information = self.text_add_information.setText() # Дополнительные сведения по требованию ТЗ
 
         #list = [name_object, filming_location, executor, customer, date_start, date_end, nature_area, type_shoot, area_afs, length_afs, orientation_route, overlap_longitudinal,
         #    overlap_transverse, height, resolution, camera_model, camera_sn, long_shift, focal_len, type_lens, frame_size_x, frame_size_y, pixel_size, coordinate_orientation, api_type,
         #    api_sn, spectral_characteristics_photo, image_format, lidar_type, lidar_sn, definition_block, receiver, other_equipment, aircraft]
-        
-        self.save_obj.save(add_information)
-         
+        data = {
+            'Название или шифр объекта съёмки':[name_object],
+            'Съёмочный участок':[filming_location], 
+            'Исполнитель':[executor],
+            'Заказчик':[customer],
+            'Дата начала АФС':[date_start],
+            'Дата окончания АФС':[date_end],
+            'Застроенная/Не застроенная':[nature_area],
+            'Вид съёмки':[type_shoot],
+            'Фактическая площадь АФС, для АФС объекта площадного характера':[area_afs],
+            'Фактическая протяжность АФС, км, для АФС линейного объекта':[length_afs],
+            'Ориентация маршрутов':[orientation_route],
+            'Продольное перекрытие':[overlap_longitudinal],
+            'Поперечное перекрытие':[overlap_transverse],
+            'Высота фотографирования':[height],
+            'Номинальное пространственное разрешение, м':[resolution],
+            'Модель аэрофотокамеры':[camera_model],
+            'Серийный номер аэрофотокамеры':[camera_sn],
+            'Наличие и тип компенсации продольного сдвига изображения':[long_shift],
+            'Фокусное расстояние аэрофотокамеры, мм':[focal_len],
+            'Тип и серийный номер объектива (если объектив заменяемый)':[type_lens],
+            'Размер кадра N(x) пикс':[frame_size_x],
+            'Размер кадра N(y) пикс':[frame_size_y],
+            'Физический размер пикселя, мм':[pixel_size],
+            'Ориентация системы координат снимка':[coordinate_orientation],
+            'Тип аэрофотоустановки (гироплатформы)':[api_type],
+            'Серийный номер аэрофотоустановки (гироплатформы)':[api_sn],
+            'Спектральная характеристика аэрофотоснимков':[spectral_characteristics_photo], 
+            'Формат представления цифрового изображения':[image_format],
+            'Лидар (тип)':[lidar_type],
+            'Лидар, серийный номер':[lidar_sn],
+            'Блок определения положения и ориентации, тип, модель, состав':[definition_block],
+            'ГНСС-приёмник, тип, модель':[receiver],
+            'Прочая аппаратура':[other_equipment],
+            'Воздушное судно':[aircraft]
+        }
 
+        df = pd.DataFrame(data)
+        df.to_excel('test.excel', mode='a', header=False, index=False)
+
+        
     def retranslateUi(self, AFS):
         _translate = QtCore.QCoreApplication.translate
         AFS.setWindowTitle(_translate("AFS", "AFS GUI"))
@@ -450,101 +487,6 @@ class Ui_AFS(object):
         self.radioButton.setText(_translate("AFS", "Sony RX1RM2"))
         self.radioButton_2.setText(_translate("AFS", "Sony A6000"))
         self.clear.setText(_translate("AFS", "Очистить форму"))
-
-
-class Save_Class(Ui_AFS):        
-    def save(self, text):
-        with open('111.txt', 'a') as f:
-             f.write(text)
-             f.write('\n')
-
-
-class Connect_DB(Ui_AFS):
-    def connect(self):
-        conn = psycopg2.connect(dbname='', user='', password='', host='')
-        c = conn.cursor()
-        #Создание таблицы
-        c.execute('''CREATE TABLE IF NOT EXISTS
-        testable
-            (id INTEGER PRIMARY KEY
-        AUTOINCREMENT,
-                  name_object1 TEXT,
-                  filming_location1 TEXT,
-                  executor1 TEXT,
-                  customer1 TEXT,
-                  date_start1 TEXT,
-                  date_end1 TEXT,
-                  nature_area1 TEXT,
-                  type_shoot1 TEXT,
-                  area_afs1 TEXT,
-                  length_afs1 TEXT,
-                  orientation_route1 TEXT,
-                  overlap_longitudinal1 TEXT,
-                  overlap_transverse1 TEXT,
-                  height1 TEXT,
-                  resolution1 TEXT,
-                  camera_model1 TEXT,
-                  camera_sn1 TEXT,
-                  long_shift1 TEXT,
-                  focal_len1 TEXT
-                  type_lens1 TEXT,
-                  frame_size_x1 TEXT,
-                  frame_size_y1 TEXT,
-                  pixel_size1 TEXT,
-                  coordinate_orientation1 TEXT,
-                  api_type1 TEXT,
-                  api_sn1 TEXT,
-                  spectral_characteristics_photo1 TEXT,
-                  image_format1 TEXT,
-                  lidar_type1 TEXT,
-                  lidar_sn1 TEXT,
-                  definition_block1 TEXT,
-                  receiver1 TEXT,
-                  other_equipment1 TEXT,
-                  aircraft1 TEXT,
-                  add_information1 TEXT)''')
-        
-        name_object1_value = 'Название или шифр объекта съёмки'
-        filming_location1_value = 'Съёмочный участок'
-        executor1_value = 'Исполнитель'
-        customer1_value = 'Заказчик'
-        date_start1_value = 'Дата начала АФС'
-        date_end1_value = 'Дата окончания АФС'
-        nature_area1_value = 'Застроенная/Не застроенная'
-        type_shoot1_value = 'Вид съёмки'
-        area_afs1_value = 'Фактическая площадь АФС, для АФС объекта площадного характера'
-        length_afs1_value = 'Фактическая протяжность АФС, км, для АФС линейного объекта'
-        orientation_route1_value = 'Ориентация маршрутов (широтная, меридиональная, заданная)'
-        overlap_longitudinal1_value = 'Продольное перекрытие'
-        overlap_transverse1_value = 'Поперечное перекрытие'
-        height1_value = 'Высота фотографирования'
-        resolution1_value = 'Номинальное пространственное разрешение, м'
-        camera_model1_value = 'Модель аэрофотокамеры'
-        camera_sn1_value = 'Серийный номер аэрофотокамеры'
-        long_shift1_value = 'Наличие и тип компенсации продольного сдвига изображения'
-        focal_len1_value = 'Фокусное расстояние аэрофотокамеры, мм'
-        type_lens1_value = 'Тип и серийный номер объектива (если объектив заменяемый)'
-        frame_size_x1_value = 'Размер кадра N(x) пикс'
-        frame_size_y1_value = 'Размер кадра N(y) пикс'
-        pixel_size1_value = 'Физический размер пикселя, мм'
-        coordinate_orientation1_value = 'Ориентация системы координат снимка'
-        api_type1_value = 'Тип аэрофотоустановки (гироплатформы)'
-        api_sn1_value = 'Серийный номер аэрофотоустановки (гироплатформы)'
-        spectral_characteristics_photo1_value = 'Спектральная характеристика аэрофотоснимков'
-        image_format1_value = 'Формат представления цифрового изображения'
-        lidar_type1_value = 'Лидар (тип)'
-        lidar_sn1_value = 'Лидар, серийный номер'
-        definition_block1_value = 'Блок определения положения и ориентации, тип, модель, состав'
-        receiver1_value = 'ГНСС-приёмник, тип, модель'
-        other_equipment1_value = 'Прочая аппаратура'
-        aircraft1_value = 'Воздушное судно'
-        add_information1_value = 'Дополнительные сведения по требованию ТЗ'
-
-        c.execute('INSERT INTO testable (name_object1, filming_location1, executor1, customer1, date_start1, date_end1, nature_area1, type_shoot1, area_afs1, length_afs1, orientation_route1, overlap_longitudinal1, overlap_transverse1, height1, resolution1, camera_model1, camera_sn1, long_shift1, focal_len1, type_lens1, frame_size_x1, frame_size_y1, pixel_size1, coordinate_orientation1, api_type1, api_sn1, spectral_characteristics_photo1, image_format1,lidar_type1, lidar_sn1, definition_block1, receiver1, other_equipment1, aircraft1, add_information1) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', 
-                  (name_object1_value, filming_location1_value, executor1_value, customer1_value, date_start1_value, date_end1_value, nature_area1_value, type_shoot1_value, area_afs1_value, length_afs1_value, orientation_route1_value, overlap_longitudinal1_value, overlap_transverse1_value, height1_value, resolution1_value, camera_model1_value, camera_sn1_value, long_shift1_value, focal_len1_value, type_lens1_value, frame_size_x1_value, frame_size_y1_value, pixel_size1_value, coordinate_orientation1_value, api_type1_value, api_sn1_value, spectral_characteristics_photo1_value, image_format1_value, lidar_type1_value, lidar_sn1_value, definition_block1_value, receiver1_value, other_equipment1_value, aircraft1_value, add_information1_value))
-        
-        c.close()
-        conn.close()
 
 
 
