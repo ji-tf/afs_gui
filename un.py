@@ -423,7 +423,7 @@ class Ui_AFS(object):
         }
 
         df = pd.DataFrame(data)
-        df.to_excel('test.excel', mode='a', header=False, index=False)
+        df.to_csv('test.csv', mode='a', header=False, index=False)
 
         
     def retranslateUi(self, AFS):
