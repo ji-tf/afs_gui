@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import sqlite3
+import psycopg2
 
 
 class Ui_AFS(object):
@@ -380,13 +380,13 @@ class Ui_AFS(object):
         receiver = self.receiver.text() # ГНСС-приёмник, тип, модель
         other_equipment = self.other_equipment.text() # Прочая аппаратура
         aircraft = self.aircraft.text() # Воздушное судно"))
-        #add_information = self.text_add_information.setText() # Дополнительные сведения по требованию ТЗ
+        add_information = self.text_add_information.setText() # Дополнительные сведения по требованию ТЗ
 
-        list = [name_object, filming_location, executor, customer, date_start, date_end, nature_area, type_shoot, area_afs, length_afs, orientation_route, overlap_longitudinal,
-            overlap_transverse, height, resolution, camera_model, camera_sn, long_shift, focal_len, type_lens, frame_size_x, frame_size_y, pixel_size, coordinate_orientation, api_type,
-            api_sn, spectral_characteristics_photo, image_format, lidar_type, lidar_sn, definition_block, receiver, other_equipment, aircraft]
+        #list = [name_object, filming_location, executor, customer, date_start, date_end, nature_area, type_shoot, area_afs, length_afs, orientation_route, overlap_longitudinal,
+        #    overlap_transverse, height, resolution, camera_model, camera_sn, long_shift, focal_len, type_lens, frame_size_x, frame_size_y, pixel_size, coordinate_orientation, api_type,
+        #    api_sn, spectral_characteristics_photo, image_format, lidar_type, lidar_sn, definition_block, receiver, other_equipment, aircraft]
         
-        self.save_obj.save(lidar_type)
+        self.save_obj.save(add_information)
          
 
     def retranslateUi(self, AFS):
@@ -456,11 +456,12 @@ class Save_Class(Ui_AFS):
     def save(self, text):
         with open('111.txt', 'a') as f:
              f.write(text)
+             f.write('\n')
 
 
 class Connect_DB(Ui_AFS):
     def connect(self):
-        conn = sqlite3.connect('test.db')
+        conn = psycopg2.connect(dbname='', user='', password='', host='')
         c = conn.cursor()
         #Создание таблицы
         c.execute('''CREATE TABLE IF NOT EXISTS
@@ -539,10 +540,10 @@ class Connect_DB(Ui_AFS):
         aircraft1_value = 'Воздушное судно'
         add_information1_value = 'Дополнительные сведения по требованию ТЗ'
 
-        c.execute('INSERT INTO testable (name_object1, filming_location1, executor1, customer1, date_start1, date_end1, nature_area1, type_shoot1, area_afs1, length_afs1, orientation_route1, overlap_longitudinal1, overlap_transverse1, height1, resolution1, camera_model1, camera_sn1, long_shift1, focal_len1, type_lens1, frame_size_x1, frame_size_y1, pixel_size1, coordinate_orientation1, api_type1, api_sn1, spectral_characteristics_photo1, image_format1,lidar_type1, lidar_sn1, definition_block1, receiver1, other_equipment1, aircraft1, add_information1) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+        c.execute('INSERT INTO testable (name_object1, filming_location1, executor1, customer1, date_start1, date_end1, nature_area1, type_shoot1, area_afs1, length_afs1, orientation_route1, overlap_longitudinal1, overlap_transverse1, height1, resolution1, camera_model1, camera_sn1, long_shift1, focal_len1, type_lens1, frame_size_x1, frame_size_y1, pixel_size1, coordinate_orientation1, api_type1, api_sn1, spectral_characteristics_photo1, image_format1,lidar_type1, lidar_sn1, definition_block1, receiver1, other_equipment1, aircraft1, add_information1) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', 
                   (name_object1_value, filming_location1_value, executor1_value, customer1_value, date_start1_value, date_end1_value, nature_area1_value, type_shoot1_value, area_afs1_value, length_afs1_value, orientation_route1_value, overlap_longitudinal1_value, overlap_transverse1_value, height1_value, resolution1_value, camera_model1_value, camera_sn1_value, long_shift1_value, focal_len1_value, type_lens1_value, frame_size_x1_value, frame_size_y1_value, pixel_size1_value, coordinate_orientation1_value, api_type1_value, api_sn1_value, spectral_characteristics_photo1_value, image_format1_value, lidar_type1_value, lidar_sn1_value, definition_block1_value, receiver1_value, other_equipment1_value, aircraft1_value, add_information1_value))
         
-        conn.commit()
+        c.close()
         conn.close()
 
 
